@@ -185,7 +185,6 @@
     border: none;
     outline: none;
     padding: 0;
-    width: 16px;
     height: 16px;
     cursor: pointer;
     margin: 0;
