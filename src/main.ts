@@ -31,8 +31,8 @@ declare global {
 }
 
 if (typeof window === 'object') {
+  window.makibishi = { initTarget, initTargets };
   document.addEventListener('DOMContentLoaded', () => {
     initTargets();
-    window.makibishi = { initTarget, initTargets };
   });
 }
