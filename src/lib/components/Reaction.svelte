@@ -59,6 +59,7 @@
   span.makibishi-reaction > span.makibishi-content {
     display: inline-block;
     min-width: 16px;
+    cursor: default;
   }
   span.makibishi-reaction > span.makibishi-content > img {
     height: 16px;
