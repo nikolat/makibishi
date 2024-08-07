@@ -10,6 +10,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         entryFileNames: 'makibishi.js',
+        format: 'iife',
       },
     },
   },
