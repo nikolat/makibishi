@@ -26,6 +26,7 @@
     "prepare": "npm run build",
     "dev": "vite",
     "build": "vite build",
+    "postbuild": "node ./scripts/encloseGlobals.js ./dist/makibishi.js",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json && tsc -p tsconfig.node.json",
     "lint": "prettier --check .",
