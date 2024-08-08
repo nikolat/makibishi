@@ -109,7 +109,7 @@
     if (makibishiUrl !== undefined && URL.canParse(makibishiUrl)) {
       targetUrl = new URL(makibishiUrl).href;
     } else {
-      targetUrl = window.location.href;
+      targetUrl = window.location.href.replace(/#.*$/, '');
     }
     if (makibishiReaction !== undefined && inputCount(makibishiReaction) <= 1) {
       reactionContent = makibishiReaction;
