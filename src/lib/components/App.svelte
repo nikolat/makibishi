@@ -111,6 +111,9 @@
     } else {
       targetUrl = window.location.href.replace(/#.*$/, '');
     }
+    if (/^file:\/\/\//.test(targetUrl)) {
+      throw new TypeError('Local addresses are not allowed.');
+    }
     if (makibishiReaction !== undefined && inputCount(makibishiReaction) <= 1) {
       reactionContent = makibishiReaction;
     } else {
