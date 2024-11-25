@@ -20,22 +20,28 @@
     reactionEventKind,
   } from '../config';
   import { onMount } from 'svelte';
+  import { SvelteMap } from 'svelte/reactivity';
   import Reaction from './Reaction.svelte';
 
-  let reactionEvents: NostrEvent[] = [];
-  let profiles: Map<string, NostrEvent> = new Map<string, NostrEvent>();
-  let isAllowedExpand: boolean;
-  let relays: string[];
-  let targetUrl: string;
-  let reactionContent: string;
-  let allowAnonymousReaction: boolean;
-  let allowToDeleteReacion: boolean;
-  let isDisabledReaction: boolean;
-  let pubkey: string | undefined | null;
+  let reactionEvents: NostrEvent[] = $state([]);
+  let profiles: SvelteMap<string, NostrEvent> = $state(
+    new SvelteMap<string, NostrEvent>(),
+  );
+  let isAllowedExpand: boolean = $state(false);
+  let relays: string[] = $state([]);
+  let targetUrl: string = $state('');
+  let reactionContent: string = $state('');
+  let allowAnonymousReaction: boolean = $state(false);
+  let allowToDeleteReacion: boolean = $state(false);
+  let isDisabledReaction: boolean = $state(true);
+  let pubkey: string | undefined | null = $state();
 
-  export let element: HTMLElement;
-  export let pool: SimplePool;
-  export let anonymousSeckey: Uint8Array;
+  let {
+    element,
+    pool,
+    anonymousSeckey,
+  }: { element: HTMLElement; pool: SimplePool; anonymousSeckey: Uint8Array } =
+    $props();
 
   const getPubkey = async () => {
     if (!allowToDeleteReacion) {
@@ -81,7 +87,6 @@
             return;
           }
           profiles.set(event.pubkey, event);
-          profiles = profiles;
         }
       },
       true,
@@ -177,18 +182,20 @@
     isDisabledReaction = window.nostr === undefined && !allowAnonymousReaction;
   });
 
-  $: reactionValidEvents = reactionEvents.filter((ev) => isValidEmoji(ev));
-  $: reactionFirst = reactionValidEvents.at(0)!;
-  $: reactionLast = reactionValidEvents.at(-1)!;
+  const reactionValidEvents = $derived(
+    reactionEvents.filter((ev) => isValidEmoji(ev)),
+  );
+  const reactionFirst = $derived(reactionValidEvents.at(0)!);
+  const reactionLast = $derived(reactionValidEvents.at(-1)!);
 </script>
 
-<!-- svelte-ignore a11y-no-static-element-interactions -->
-<span class="makibishi-container" on:mouseover={getPubkey} on:focus={getPubkey}>
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<span class="makibishi-container" onmouseover={getPubkey} onfocus={getPubkey}>
   <button
     class="makibishi-send"
     title="add a star"
     disabled={isDisabledReaction}
-    on:click={callSendReaction}
+    onclick={callSendReaction}
     aria-label="add a star"
   >
     <svg
@@ -218,7 +225,7 @@
       {callSendDeletion}
     /><button
       class="makibishi-expand"
-      on:click={() => {
+      onclick={() => {
         isAllowedExpand = true;
       }}>{reactionValidEvents.length}</button
     ><Reaction

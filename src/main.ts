@@ -1,3 +1,4 @@
+import { mount } from 'svelte';
 import { SimplePool } from 'nostr-tools/pool';
 import { generateSecretKey } from 'nostr-tools/pure';
 import App from './lib/components/App.svelte';
@@ -7,7 +8,7 @@ const anonymousSeckey = generateSecretKey();
 
 const initTarget = (element: HTMLElement): void => {
   if (!element.hasChildNodes()) {
-    new App({
+    const app = mount(App, {
       target: element,
       props: {
         element,

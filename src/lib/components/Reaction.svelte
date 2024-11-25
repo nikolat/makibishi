@@ -3,10 +3,17 @@
   import * as nip19 from 'nostr-tools/nip19';
   import { getRoboHashURL, urlToLinkEvent } from '../config';
   import { isCustomEmoji } from '../utils';
-  export let reactionEvent: NostrEvent;
-  export let profileEvent: NostrEvent | undefined;
-  export let isAuthor: boolean;
-  export let callSendDeletion: (id: string) => Promise<void>;
+  let {
+    reactionEvent,
+    profileEvent,
+    isAuthor,
+    callSendDeletion,
+  }: {
+    reactionEvent: NostrEvent;
+    profileEvent: NostrEvent | undefined;
+    isAuthor: boolean;
+    callSendDeletion: (id: string) => Promise<void>;
+  } = $props();
 </script>
 
 <span
@@ -44,7 +51,7 @@
     >{#if isAuthor}<button
         class="makibishi-delete"
         title="delete the star"
-        on:click={async () => {
+        onclick={async () => {
           await callSendDeletion(reactionEvent.id);
         }}
         aria-label="delete the star"
