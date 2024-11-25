@@ -33,7 +33,7 @@
       rel="noopener noreferrer"
       ><img
         class="makibishi-profile-picture"
-        src={obj.picture ?? getRoboHashURL(reactionEvent.pubkey)}
+        src={URL.canParse(obj.picture) ? obj.picture : getRoboHashURL(reactionEvent.pubkey)}
         alt="@{name}"
         title="@{name}"
       /></a
