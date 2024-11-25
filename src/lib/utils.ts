@@ -72,6 +72,26 @@ export const sendReaction = async (
   return event;
 };
 
+export const sendDeletion = async (
+  pool: SimplePool,
+  relaysToWrite: string[],
+  eventId: string,
+): Promise<void> => {
+  const baseEvent: EventTemplate = {
+    kind: 5,
+    created_at: Math.floor(Date.now() / 1000),
+    tags: [
+      ['e', eventId],
+      ['k', String(reactionEventKind)],
+    ],
+    content: '',
+  };
+  if (window.nostr === undefined) return;
+  const event = await window.nostr.signEvent(baseEvent);
+  const pubs = pool.publish(relaysToWrite, event);
+  await Promise.any(pubs);
+};
+
 export const inputCount = (input: string): number => {
   // simple check, not perfect
   const segmeter = new Intl.Segmenter('ja-JP', { granularity: 'word' });

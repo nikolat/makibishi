@@ -9,6 +9,7 @@
     getGeneralEvents,
     inputCount,
     isValidEmoji,
+    sendDeletion,
     sendReaction,
   } from '../utils';
   import {
@@ -28,11 +29,27 @@
   let targetUrl: string;
   let reactionContent: string;
   let allowAnonymousReaction: boolean;
+  let allowToDeleteReacion: boolean;
   let isDisabledReaction: boolean;
+  let pubkey: string | undefined | null;
 
   export let element: HTMLElement;
   export let pool: SimplePool;
   export let anonymousSeckey: Uint8Array;
+
+  const getPubkey = async () => {
+    if (!allowToDeleteReacion) {
+      return;
+    }
+    if (pubkey !== undefined) {
+      return;
+    }
+    pubkey = null;
+    if (window.nostr === undefined) {
+      return;
+    }
+    pubkey = await window.nostr.getPublicKey();
+  };
 
   const getReactions = async (url: string): Promise<void> => {
     if (!URL.canParse(url)) return;
@@ -88,12 +105,19 @@
     }
   };
 
+  const callSendDeletion = async (id: string): Promise<void> => {
+    await sendDeletion(pool, relays, id);
+    reactionEvents = reactionEvents.filter((ev) => ev.id !== id);
+  };
+
   onMount(async () => {
     const makibishiRelays = element.dataset.relays;
     const makibishiUrl = element.dataset.url;
     const makibishiReaction = element.dataset.content;
     const makibishiAllowAnonymousReaction =
       element.dataset.allowAnonymousReaction;
+    const makibishiAllowToDeleteReaction =
+      element.dataset.allowToDeleteReaction;
     if (makibishiRelays !== undefined) {
       relays = Array.from(
         new Set<string>(
@@ -127,11 +151,20 @@
     } else {
       allowAnonymousReaction = false;
     }
+    if (
+      makibishiAllowToDeleteReaction !== undefined &&
+      /^true$/i.test(makibishiAllowToDeleteReaction)
+    ) {
+      allowToDeleteReacion = true;
+    } else {
+      allowToDeleteReacion = false;
+    }
     console.log('MAKIBISHI Settings:', {
       relays,
       targetUrl,
       reactionContent,
       allowAnonymousReaction,
+      allowToDeleteReacion,
     });
     isAllowedExpand = false;
     isDisabledReaction = true;
@@ -149,12 +182,14 @@
   $: reactionLast = reactionValidEvents.at(-1)!;
 </script>
 
-<span class="makibishi-container">
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<span class="makibishi-container" on:mouseover={getPubkey} on:focus={getPubkey}>
   <button
     class="makibishi-send"
     title="add a star"
     disabled={isDisabledReaction}
     on:click={callSendReaction}
+    aria-label="add a star"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -172,11 +207,15 @@
     {#each reactionValidEvents as reactionEvent}<Reaction
         {reactionEvent}
         profileEvent={profiles.get(reactionEvent.pubkey)}
+        isAuthor={reactionEvent.pubkey === pubkey}
+        {callSendDeletion}
       />{/each}
   {:else}
     <Reaction
       reactionEvent={reactionFirst}
       profileEvent={profiles.get(reactionFirst.pubkey)}
+      isAuthor={reactionFirst.pubkey === pubkey}
+      {callSendDeletion}
     /><button
       class="makibishi-expand"
       on:click={() => {
@@ -185,6 +224,8 @@
     ><Reaction
       reactionEvent={reactionLast}
       profileEvent={profiles.get(reactionLast.pubkey)}
+      isAuthor={reactionLast.pubkey === pubkey}
+      {callSendDeletion}
     />
   {/if}
 </span>
