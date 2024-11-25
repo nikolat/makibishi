@@ -7,7 +7,7 @@ Add a star to any website.
 Add this `script` tag in the `head` tag.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@nikolat/makibishi@0.1.8"></script>
+<script src="https://cdn.jsdelivr.net/npm/@nikolat/makibishi@0.1.9"></script>
 ```
 
 Place an HTML element with `makibishi` as the `class` attribute value anywhere you like, as shown below.
