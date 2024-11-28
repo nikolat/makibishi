@@ -15,6 +15,7 @@
   },
   "files": [
     "dist",
+    "!dist/favicon.png",
     "!dist/index.html"
   ],
   "browser": "dist/makibishi.js",
