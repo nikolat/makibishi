@@ -15,7 +15,7 @@ export const getGeneralEvents = (
 	pool: SimplePool,
 	relays: string[],
 	filters: Filter[],
-	callbackEvent: Function = () => {},
+	callbackEvent: (event: NostrEvent) => void,
 	autoClose: boolean = true
 ): Promise<NostrEvent[]> => {
 	return new Promise((resolve) => {

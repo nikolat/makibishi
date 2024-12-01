@@ -47,7 +47,7 @@
 
 	const getReactions = async (url: string): Promise<void> => {
 		if (!URL.canParse(url)) return;
-		const reactionEventsFetched = await getGeneralEvents(
+		const _reactionEventsFetched = await getGeneralEvents(
 			pool,
 			relays,
 			[{ kinds: [reactionEventKind], '#r': [url] }],
@@ -61,7 +61,7 @@
 	};
 
 	const getProfiles = async (pubkeys: string[]): Promise<void> => {
-		const profileEventsFetched = await getGeneralEvents(
+		const _profileEventsFetched = await getGeneralEvents(
 			pool,
 			profileRelays,
 			[{ kinds: [0], authors: pubkeys }],
@@ -69,7 +69,7 @@
 				const prof = profiles.get(event.pubkey);
 				if (prof === undefined || prof.created_at < event.created_at) {
 					try {
-						const obj = JSON.parse(event.content);
+						const _obj = JSON.parse(event.content);
 					} catch (error) {
 						console.warn(error);
 						return;

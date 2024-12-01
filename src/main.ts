@@ -8,7 +8,7 @@ const anonymousSeckey = generateSecretKey();
 
 const initTarget = (element: HTMLElement): void => {
 	if (!element.hasChildNodes()) {
-		const app = mount(App, {
+		const _app = mount(App, {
 			target: element,
 			props: {
 				element,
@@ -26,7 +26,12 @@ const initTargets = (selector?: string): void => {
 };
 
 declare global {
-	var makibishi: object;
+	interface Window {
+		makibishi: {
+			initTarget: (element: HTMLElement) => void;
+			initTargets: (selector?: string) => void;
+		};
+	}
 }
 
 if (typeof window === 'object') {
