@@ -1,53 +1,53 @@
 {
-  "name": "@nikolat/makibishi",
-  "version": "0.2.0",
-  "description": "add a star to any website",
-  "keywords": [
-    "nostr"
-  ],
-  "homepage": "https://nikolat.github.io/makibishi/",
-  "bugs": {
-    "url": "https://github.com/nikolat/makibishi/issues"
-  },
-  "license": "CC0-1.0",
-  "author": {
-    "name": "Don"
-  },
-  "files": [
-    "dist",
-    "!dist/favicon.png",
-    "!dist/ogp.png",
-    "!dist/index.html"
-  ],
-  "browser": "dist/makibishi.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nikolat/makibishi.git"
-  },
-  "scripts": {
-    "prepare": "npm run build",
-    "dev": "vite",
-    "build": "vite build",
-    "postbuild": "node ./scripts/encloseGlobals.js ./dist/makibishi.js",
-    "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.json && tsc -p tsconfig.node.json",
-    "lint": "prettier --check .",
-    "format": "prettier --write ."
-  },
-  "dependencies": {
-    "nostr-tools": "^2.10.3"
-  },
-  "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^4.0.2",
-    "@tsconfig/svelte": "^5.0.4",
-    "prettier": "^3.3.3",
-    "prettier-plugin-svelte": "^3.3.2",
-    "svelte": "^5.2.7",
-    "svelte-check": "^4.1.0",
-    "tslib": "^2.8.1",
-    "typescript": "^5.7.2",
-    "vite": "^5.4.11",
-    "vite-plugin-css-injected-by-js": "^3.5.2"
-  },
-  "type": "module"
+	"name": "@nikolat/makibishi",
+	"version": "0.2.0",
+	"description": "add a star to any website",
+	"keywords": [
+		"nostr"
+	],
+	"homepage": "https://nikolat.github.io/makibishi/",
+	"bugs": {
+		"url": "https://github.com/nikolat/makibishi/issues"
+	},
+	"license": "CC0-1.0",
+	"author": {
+		"name": "Don"
+	},
+	"files": [
+		"dist",
+		"!dist/favicon.png",
+		"!dist/ogp.png",
+		"!dist/index.html"
+	],
+	"browser": "dist/makibishi.js",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/nikolat/makibishi.git"
+	},
+	"scripts": {
+		"prepare": "npm run build",
+		"dev": "vite",
+		"build": "vite build",
+		"postbuild": "node ./scripts/encloseGlobals.js ./dist/makibishi.js",
+		"preview": "vite preview",
+		"check": "svelte-check --tsconfig ./tsconfig.json && tsc -p tsconfig.node.json",
+		"lint": "prettier --check .",
+		"format": "prettier --write ."
+	},
+	"dependencies": {
+		"nostr-tools": "^2.10.3"
+	},
+	"devDependencies": {
+		"@sveltejs/vite-plugin-svelte": "^4.0.2",
+		"@tsconfig/svelte": "^5.0.4",
+		"prettier": "^3.3.3",
+		"prettier-plugin-svelte": "^3.3.2",
+		"svelte": "^5.2.7",
+		"svelte-check": "^4.1.0",
+		"tslib": "^2.8.1",
+		"typescript": "^5.7.2",
+		"vite": "^5.4.11",
+		"vite-plugin-css-injected-by-js": "^3.5.2"
+	},
+	"type": "module"
 }

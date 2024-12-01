@@ -20,12 +20,12 @@ Place an HTML element with `makibishi` as the `class` attribute value anywhere y
 
 ```html
 <span
-  class="makibishi"
-  data-relays="wss://relay1.example.com/,wss://relay2.example.com/,wss://relay3.example.com/"
-  data-url="https://example.com/"
-  data-content="🤙"
-  data-allow-anonymous-reaction="true"
-  data-allow-to-delete-reaction="true"
+	class="makibishi"
+	data-relays="wss://relay1.example.com/,wss://relay2.example.com/,wss://relay3.example.com/"
+	data-url="https://example.com/"
+	data-content="🤙"
+	data-allow-anonymous-reaction="true"
+	data-allow-to-delete-reaction="true"
 ></span>
 ```
 

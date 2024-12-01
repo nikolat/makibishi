@@ -1,40 +1,31 @@
 <!doctype html>
 <html lang="en" prefix="og: https://ogp.me/ns#">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta property="og:title" content="MAKIBISHI" />
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:image"
-      content="https://nikolat.github.io/makibishi/ogp.png"
-    />
-    <meta
-      property="og:url"
-      content="https://nikolat.github.io/makibishi/"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css"
-    />
-    <link rel="icon" type="image/png" href="./favicon.png" />
-    <title>MAKIBISHI</title>
-  </head>
-  <body>
-    <h1>
-      MAKIBISHI<span
-        class="makibishi"
-        data-relays="wss://relay.nostr.band/,wss://nos.lol/,wss://relay.damus.io/,wss://relay.nostr.wirednet.jp/,wss://relay-jp.nostr.wirednet.jp/,wss://yabu.me/,wss://r.kojira.io/"
-        data-allow-anonymous-reaction="true"
-      ></span>
-    </h1>
-    <h2>Usage</h2>
-    <p>In the <code>&lt;head&gt;</code> tag</p>
-    <pre><code>&lt;script src=&quot;https://cdn.jsdelivr.net/npm/@nikolat/makibishi@0.2.0&quot;&gt;&lt;/script&gt;</code></pre>
-    <p>In the <code>&lt;body&gt;</code> tag</p>
-    <pre><code>&lt;span class=&quot;makibishi&quot;&gt;&lt;/span&gt;</code></pre>
-    <h3>Options</h3>
-    <pre><code>&lt;span
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta property="og:title" content="MAKIBISHI" />
+		<meta property="og:type" content="website" />
+		<meta property="og:image" content="https://nikolat.github.io/makibishi/ogp.png" />
+		<meta property="og:url" content="https://nikolat.github.io/makibishi/" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css" />
+		<link rel="icon" type="image/png" href="./favicon.png" />
+		<title>MAKIBISHI</title>
+	</head>
+	<body>
+		<h1>
+			MAKIBISHI<span
+				class="makibishi"
+				data-relays="wss://relay.nostr.band/,wss://nos.lol/,wss://relay.damus.io/,wss://relay.nostr.wirednet.jp/,wss://relay-jp.nostr.wirednet.jp/,wss://yabu.me/,wss://r.kojira.io/"
+				data-allow-anonymous-reaction="true"
+			></span>
+		</h1>
+		<h2>Usage</h2>
+		<p>In the <code>&lt;head&gt;</code> tag</p>
+		<pre><code>&lt;script src=&quot;https://cdn.jsdelivr.net/npm/@nikolat/makibishi@0.2.0&quot;&gt;&lt;/script&gt;</code></pre>
+		<p>In the <code>&lt;body&gt;</code> tag</p>
+		<pre><code>&lt;span class=&quot;makibishi&quot;&gt;&lt;/span&gt;</code></pre>
+		<h3>Options</h3>
+		<pre><code>&lt;span
   class=&quot;makibishi&quot;
   data-relays=&quot;wss://relay1.example.com/,wss://relay2.example.com/,wss://relay3.example.com/&quot;
   data-url=&quot;https://example.com/&quot;
@@ -43,20 +34,17 @@
   data-allow-to-delete-reaction=&quot;true&quot;
 &gt;&lt;/span&gt;
 </code></pre>
-    <footer>
-      <a
-        href="https://github.com/nikolat/makibishi"
-        target="_blank"
-        rel="noopener noreferrer"
-        >GitHub</a
-      ><span
-        class="makibishi"
-        data-relays="wss://relay.nostr.band/,wss://nos.lol/,wss://relay.damus.io/,wss://relay.nostr.wirednet.jp/,wss://relay-jp.nostr.wirednet.jp/,wss://yabu.me/,wss://r.kojira.io/"
-        data-url="https://github.com/nikolat/makibishi"
-        data-allow-anonymous-reaction="true"
-        data-allow-to-delete-reaction="true"
-      ></span>
-    </footer>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+		<footer>
+			<a href="https://github.com/nikolat/makibishi" target="_blank" rel="noopener noreferrer"
+				>GitHub</a
+			><span
+				class="makibishi"
+				data-relays="wss://relay.nostr.band/,wss://nos.lol/,wss://relay.damus.io/,wss://relay.nostr.wirednet.jp/,wss://relay-jp.nostr.wirednet.jp/,wss://yabu.me/,wss://r.kojira.io/"
+				data-url="https://github.com/nikolat/makibishi"
+				data-allow-anonymous-reaction="true"
+				data-allow-to-delete-reaction="true"
+			></span>
+		</footer>
+		<script type="module" src="/src/main.ts"></script>
+	</body>
 </html>
