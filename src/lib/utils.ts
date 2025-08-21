@@ -43,7 +43,10 @@ export const sendReaction = async (
 	seckey?: Uint8Array,
 	emojiUrl?: string
 ): Promise<NostrEvent | null> => {
-	const tags: string[][] = [['r', targetUrl]];
+	const tags: string[][] = [
+		['i', targetUrl],
+		['k', 'web']
+	];
 	if (emojiUrl) {
 		tags.push(['emoji', content.replaceAll(':', ''), emojiUrl]);
 	}

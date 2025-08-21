@@ -15,7 +15,7 @@
 	import Reaction from './Reaction.svelte';
 
 	let reactionEvents: NostrEvent[] = $state([]);
-	let profiles: SvelteMap<string, NostrEvent> = $state(new SvelteMap<string, NostrEvent>());
+	let profiles: SvelteMap<string, NostrEvent> = new SvelteMap<string, NostrEvent>();
 	let isAllowedExpand: boolean = $state(false);
 	let relays: string[] = $state([]);
 	let targetUrl: string = $state('');
@@ -50,7 +50,10 @@
 		const _reactionEventsFetched = await getGeneralEvents(
 			pool,
 			relays,
-			[{ kinds: [reactionEventKind], '#r': [url] }],
+			[
+				{ kinds: [reactionEventKind], '#r': [url] },
+				{ kinds: [reactionEventKind], '#i': [url], '#k': ['web'] }
+			],
 			(event: NostrEvent) => {
 				if (!reactionEvents.some((ev) => ev.id === event.id)) {
 					reactionEvents = insertEventIntoAscendingList(reactionEvents, event);
@@ -186,7 +189,7 @@
 		</svg>
 	</button>
 	{#if reactionValidEvents.length <= expansionThreshold || isAllowedExpand}
-		{#each reactionValidEvents as reactionEvent}<Reaction
+		{#each reactionValidEvents as reactionEvent (reactionEvent.id)}<Reaction
 				{reactionEvent}
 				profileEvent={profiles.get(reactionEvent.pubkey)}
 				isAuthor={reactionEvent.pubkey === pubkey}
