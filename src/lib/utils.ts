@@ -19,19 +19,31 @@ export const getGeneralEvents = (
 	autoClose: boolean = true
 ): Promise<NostrEvent[]> => {
 	return new Promise((resolve) => {
+		let count: number = 0;
+		const subs: SubCloser[] = [];
 		const events: NostrEvent[] = [];
 		const onevent = (ev: NostrEvent) => {
 			events.push(ev);
 			callbackEvent(ev);
 		};
 		const oneose = () => {
-			if (autoClose) sub.close();
-			resolve(events);
+			count++;
+			if (count >= filters.length) {
+				if (autoClose) {
+					for (const sub of subs) {
+						sub.close();
+					}
+				}
+				resolve(events);
+			}
 		};
-		const sub: SubCloser = pool.subscribeMany(relays, filters, {
-			onevent,
-			oneose
-		});
+		for (const filter of filters) {
+			const sub: SubCloser = pool.subscribeMany(relays, filter, {
+				onevent,
+				oneose
+			});
+			subs.push(sub);
+		}
 	});
 };
 
