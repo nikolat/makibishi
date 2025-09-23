@@ -2,6 +2,8 @@ name: Publish Package to npmjs
 on:
   release:
     types: [published]
+permissions:
+  id-token: write # Required for OIDC
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,7 +18,8 @@ jobs:
         with:
           node-version: "22.x"
           registry-url: "https://registry.npmjs.org"
-      - run: npm i
-      - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # Ensure npm 11.5.1 or later is installed
+      - name: Update npm
+        run: npm install -g npm@latest
+      - run: npm ci
+      - run: npm publish
